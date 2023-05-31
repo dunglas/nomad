@@ -22,6 +22,7 @@ on:
       - main
       - release/**
       - convert-hashicorp-nomad-to-actions-20230505-212504
+      - releng/test-windows-2019
     paths-ignore:
       - 'README.md'
       - 'CHANGELOG.md'

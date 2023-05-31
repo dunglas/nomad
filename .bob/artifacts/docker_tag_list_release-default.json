@@ -1,0 +1,11 @@
+{
+  "dev_tags": [
+    "docker.io/hashicorppreview/consul-telemetry-collector:0.0.1-dev",
+    "docker.io/hashicorppreview/consul-telemetry-collector:0.0.1-dev-3dade2a7d6e35f4adb063d747cf50db31786dda0"
+  ],
+  "redhat_tag": [],
+  "tags": [
+    "docker.io/hashicorp/consul-telemetry-collector:0.0.1-dev",
+    "986891699432.dkr.ecr.us-east-1.amazonaws.com/hashicorp/consul-telemetry-collector:0.0.1-dev"
+  ]
+}

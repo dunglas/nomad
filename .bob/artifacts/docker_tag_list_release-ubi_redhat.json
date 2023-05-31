@@ -1,0 +1,7 @@
+{
+  "dev_tags": [],
+  "redhat_tag": [
+    "quay.io/redhat-isv-containers/62211e0d8bf2cabc69a39c7d:0.0.1-dev-ubi"
+  ],
+  "tags": []
+}

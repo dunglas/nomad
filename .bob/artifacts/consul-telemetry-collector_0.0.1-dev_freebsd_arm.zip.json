@@ -1,0 +1,169 @@
+{
+  "Primary": {
+    "Config": {
+      "Product": {
+        "Repository": "consul-telemetry-collector",
+        "Module": "github.com/hashicorp/consul-telemetry-collector",
+        "Name": "consul-telemetry-collector",
+        "CoreName": "consul-telemetry-collector",
+        "ExecutableName": "consul-telemetry-collector",
+        "Version": {
+          "Full": "0.0.1-dev",
+          "Core": "0.0.1-dev",
+          "Meta": ""
+        },
+        "Revision": "3dade2a7d6e35f4adb063d747cf50db31786dda0",
+        "RevisionTime": "2023-05-25T02:39:56Z",
+        "SourceHash": "3dade2a7d6e35f4adb063d747cf50db31786dda0"
+      },
+      "Parameters": {
+        "GoVersion": "1.19.4",
+        "Instructions": "make build",
+        "OS": "freebsd",
+        "Arch": "arm",
+        "ZipName": "consul-telemetry-collector_0.0.1-dev_freebsd_arm.zip"
+      },
+      "Paths": {
+        "WorkDir": "/home/runner/work/consul-telemetry-collector/consul-telemetry-collector",
+        "TargetDir": "/home/runner/work/consul-telemetry-collector/consul-telemetry-collector/dist",
+        "BinPath": "/home/runner/work/consul-telemetry-collector/consul-telemetry-collector/dist/consul-telemetry-collector",
+        "ZipPath": "/home/runner/work/consul-telemetry-collector/consul-telemetry-collector/out/consul-telemetry-collector_0.0.1-dev_freebsd_arm.zip",
+        "MetaDir": "/home/runner/work/consul-telemetry-collector/consul-telemetry-collector/meta"
+      },
+      "Tool": {
+        "Name": "actions-go-build",
+        "Version": "0.1.7",
+        "Revision": "b712d316a0484806ec3fa2c744c064f8874ceff1",
+        "RevisionTime": "2022-11-01T16:43:23Z"
+      },
+      "Reproducible": false
+    },
+    "Env": [
+      "PRODUCT_NAME=consul-telemetry-collector",
+      "PRODUCT_VERSION=0.0.1-dev",
+      "PRODUCT_REVISION=3dade2a7d6e35f4adb063d747cf50db31786dda0",
+      "PRODUCT_REVISION_TIME=2023-05-25T02:39:56Z",
+      "OS=freebsd",
+      "ARCH=arm",
+      "GOOS=freebsd",
+      "GOARCH=arm",
+      "WORKTREE_DIRTY=false",
+      "WORKTREE_HASH=3dade2a7d6e35f4adb063d747cf50db31786dda0",
+      "TARGET_DIR=/home/runner/work/consul-telemetry-collector/consul-telemetry-collector/dist",
+      "BIN_PATH=/home/runner/work/consul-telemetry-collector/consul-telemetry-collector/dist/consul-telemetry-collector"
+    ],
+    "Meta": {
+      "Start": "2023-05-25T02:41:50.290264535Z",
+      "Finish": "2023-05-25T02:44:17.238072283Z",
+      "Duration": "2m26.947807848s"
+    },
+    "Zip": {
+      "Name": "consul-telemetry-collector_0.0.1-dev_freebsd_arm.zip",
+      "OriginalPath": "/home/runner/work/consul-telemetry-collector/consul-telemetry-collector/out/consul-telemetry-collector_0.0.1-dev_freebsd_arm.zip",
+      "Size": 32567230,
+      "SHA256Sum": "f9de7f19ee09f28690ceb116218c0b2f2a65c97bfe0f1497227c1f1d5f813d82"
+    },
+    "Executable": {
+      "Name": "consul-telemetry-collector",
+      "OriginalPath": "/home/runner/work/consul-telemetry-collector/consul-telemetry-collector/dist/consul-telemetry-collector",
+      "Size": 75209621,
+      "SHA256Sum": "7ce6ec2fd087d4d471868b8be9f7279a0299bf99ac63a938aa7d602a877e1584"
+    },
+    "Successful": true
+  },
+  "Verification": {
+    "Config": {
+      "Product": {
+        "Repository": "consul-telemetry-collector",
+        "Module": "github.com/hashicorp/consul-telemetry-collector",
+        "Name": "consul-telemetry-collector",
+        "CoreName": "consul-telemetry-collector",
+        "ExecutableName": "consul-telemetry-collector",
+        "Version": {
+          "Full": "0.0.1-dev",
+          "Core": "0.0.1-dev",
+          "Meta": ""
+        },
+        "Revision": "3dade2a7d6e35f4adb063d747cf50db31786dda0",
+        "RevisionTime": "2023-05-25T02:39:56Z",
+        "SourceHash": "3dade2a7d6e35f4adb063d747cf50db31786dda0"
+      },
+      "Parameters": {
+        "GoVersion": "1.19.4",
+        "Instructions": "make build",
+        "OS": "freebsd",
+        "Arch": "arm",
+        "ZipName": "consul-telemetry-collector_0.0.1-dev_freebsd_arm.zip"
+      },
+      "Paths": {
+        "WorkDir": "/home/runner/work/_temp/actions-go-build/0.1.7/b712d316a0484806ec3fa2c744c064f8874ceff1/verification/dac4a07e1f20412c63778cc452e7075c4d4c0369681848d42b1e58d1ad24dbd8/cache/source/consul-telemetry-collector/consul-telemetry-collector/3dade2a7d6e35f4adb063d747cf50db31786dda0",
+        "TargetDir": "/home/runner/work/_temp/actions-go-build/0.1.7/b712d316a0484806ec3fa2c744c064f8874ceff1/verification/dac4a07e1f20412c63778cc452e7075c4d4c0369681848d42b1e58d1ad24dbd8/cache/source/consul-telemetry-collector/consul-telemetry-collector/3dade2a7d6e35f4adb063d747cf50db31786dda0/dist",
+        "BinPath": "/home/runner/work/_temp/actions-go-build/0.1.7/b712d316a0484806ec3fa2c744c064f8874ceff1/verification/dac4a07e1f20412c63778cc452e7075c4d4c0369681848d42b1e58d1ad24dbd8/cache/source/consul-telemetry-collector/consul-telemetry-collector/3dade2a7d6e35f4adb063d747cf50db31786dda0/dist/consul-telemetry-collector",
+        "ZipPath": "/home/runner/work/_temp/actions-go-build/0.1.7/b712d316a0484806ec3fa2c744c064f8874ceff1/verification/dac4a07e1f20412c63778cc452e7075c4d4c0369681848d42b1e58d1ad24dbd8/cache/source/consul-telemetry-collector/consul-telemetry-collector/3dade2a7d6e35f4adb063d747cf50db31786dda0/out/consul-telemetry-collector_0.0.1-dev_freebsd_arm.zip",
+        "MetaDir": "/home/runner/work/_temp/actions-go-build/0.1.7/b712d316a0484806ec3fa2c744c064f8874ceff1/verification/dac4a07e1f20412c63778cc452e7075c4d4c0369681848d42b1e58d1ad24dbd8/cache/source/consul-telemetry-collector/consul-telemetry-collector/3dade2a7d6e35f4adb063d747cf50db31786dda0/meta"
+      },
+      "Tool": {
+        "Name": "actions-go-build",
+        "Version": "0.1.7",
+        "Revision": "b712d316a0484806ec3fa2c744c064f8874ceff1",
+        "RevisionTime": "2022-11-01T16:43:23Z"
+      },
+      "Reproducible": false
+    },
+    "Env": [
+      "PRODUCT_NAME=consul-telemetry-collector",
+      "PRODUCT_VERSION=0.0.1-dev",
+      "PRODUCT_REVISION=3dade2a7d6e35f4adb063d747cf50db31786dda0",
+      "PRODUCT_REVISION_TIME=2023-05-25T02:39:56Z",
+      "OS=freebsd",
+      "ARCH=arm",
+      "GOOS=freebsd",
+      "GOARCH=arm",
+      "WORKTREE_DIRTY=false",
+      "WORKTREE_HASH=3dade2a7d6e35f4adb063d747cf50db31786dda0",
+      "TARGET_DIR=/home/runner/work/_temp/actions-go-build/0.1.7/b712d316a0484806ec3fa2c744c064f8874ceff1/verification/dac4a07e1f20412c63778cc452e7075c4d4c0369681848d42b1e58d1ad24dbd8/cache/source/consul-telemetry-collector/consul-telemetry-collector/3dade2a7d6e35f4adb063d747cf50db31786dda0/dist",
+      "BIN_PATH=/home/runner/work/_temp/actions-go-build/0.1.7/b712d316a0484806ec3fa2c744c064f8874ceff1/verification/dac4a07e1f20412c63778cc452e7075c4d4c0369681848d42b1e58d1ad24dbd8/cache/source/consul-telemetry-collector/consul-telemetry-collector/3dade2a7d6e35f4adb063d747cf50db31786dda0/dist/consul-telemetry-collector"
+    ],
+    "Meta": {
+      "Start": "2023-05-25T02:44:29.87025823Z",
+      "Finish": "2023-05-25T02:44:33.358114627Z",
+      "Duration": "3.487856297s"
+    },
+    "Zip": {
+      "Name": "consul-telemetry-collector_0.0.1-dev_freebsd_arm.zip",
+      "OriginalPath": "/home/runner/work/_temp/actions-go-build/0.1.7/b712d316a0484806ec3fa2c744c064f8874ceff1/verification/dac4a07e1f20412c63778cc452e7075c4d4c0369681848d42b1e58d1ad24dbd8/cache/source/consul-telemetry-collector/consul-telemetry-collector/3dade2a7d6e35f4adb063d747cf50db31786dda0/out/consul-telemetry-collector_0.0.1-dev_freebsd_arm.zip",
+      "Size": 32567230,
+      "SHA256Sum": "f9de7f19ee09f28690ceb116218c0b2f2a65c97bfe0f1497227c1f1d5f813d82"
+    },
+    "Executable": {
+      "Name": "consul-telemetry-collector",
+      "OriginalPath": "/home/runner/work/_temp/actions-go-build/0.1.7/b712d316a0484806ec3fa2c744c064f8874ceff1/verification/dac4a07e1f20412c63778cc452e7075c4d4c0369681848d42b1e58d1ad24dbd8/cache/source/consul-telemetry-collector/consul-telemetry-collector/3dade2a7d6e35f4adb063d747cf50db31786dda0/dist/consul-telemetry-collector",
+      "Size": 75209621,
+      "SHA256Sum": "7ce6ec2fd087d4d471868b8be9f7279a0299bf99ac63a938aa7d602a877e1584"
+    },
+    "Successful": true
+  },
+  "Hashes": {
+    "Bin": {
+      "Name": "consul-telemetry-collector",
+      "Description": "executable",
+      "SHA256": {
+        "Primary": "7ce6ec2fd087d4d471868b8be9f7279a0299bf99ac63a938aa7d602a877e1584",
+        "Verification": "7ce6ec2fd087d4d471868b8be9f7279a0299bf99ac63a938aa7d602a877e1584",
+        "Match": true
+      }
+    },
+    "Zip": {
+      "Name": "consul-telemetry-collector_0.0.1-dev_freebsd_arm.zip",
+      "Description": "zip",
+      "SHA256": {
+        "Primary": "f9de7f19ee09f28690ceb116218c0b2f2a65c97bfe0f1497227c1f1d5f813d82",
+        "Verification": "f9de7f19ee09f28690ceb116218c0b2f2a65c97bfe0f1497227c1f1d5f813d82",
+        "Match": true
+      }
+    },
+    "AllMatch": true
+  },
+  "Dirty": false,
+  "ReproducedCorrectly": true
+}
