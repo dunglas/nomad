@@ -20,9 +20,14 @@ import (
 
 	docker "github.com/fsouza/go-dockerclient"
 	hclog "github.com/hashicorp/go-hclog"
+	"github.com/shoenig/test/must"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
+
 	"github.com/hashicorp/nomad/ci"
 	"github.com/hashicorp/nomad/client/taskenv"
 	"github.com/hashicorp/nomad/client/testutil"
+	"github.com/hashicorp/nomad/drivers/shared/capabilities"
 	"github.com/hashicorp/nomad/helper/pluginutils/hclspecutils"
 	"github.com/hashicorp/nomad/helper/pluginutils/hclutils"
 	"github.com/hashicorp/nomad/helper/pluginutils/loader"
@@ -33,9 +38,6 @@ import (
 	"github.com/hashicorp/nomad/plugins/drivers"
 	dtestutil "github.com/hashicorp/nomad/plugins/drivers/testutils"
 	tu "github.com/hashicorp/nomad/testutil"
-	"github.com/shoenig/test/must"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 )
 
 var (
@@ -190,6 +192,14 @@ func dockerDriverHarness(t *testing.T, cfg map[string]interface{}) *dtestutil.Dr
 			},
 		}
 	}
+
+	// TODO: this should be a proper fix in capabilities.
+	// if on windows, "allow" NET_RAW capability, which isn't actually really a thing there.
+	// https://github.com/hashicorp/nomad/issues/15181
+	if _, ok := cfg["allow_caps"]; !ok && runtime.GOOS == "windows" {
+		cfg["allow_caps"] = capabilities.DockerDefaults().Slice(false)
+	}
+
 	plugLoader, err := loader.NewPluginLoader(&loader.PluginLoaderConfig{
 		Logger:            logger,
 		PluginDir:         "./plugins",
