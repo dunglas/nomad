@@ -1,7 +1,9 @@
 # Copyright (c) HashiCorp, Inc.
 # SPDX-License-Identifier: MPL-2.0
 
-job "podman_basic" {
+# This is a simple redis job using the podman task driver.
+
+job "redis" {
 
   constraint {
     attribute = "${attr.kernel.name}"
@@ -19,7 +21,7 @@ job "podman_basic" {
       driver = "podman"
 
       config {
-        image = "redis:7"
+        image = "docker.io/library/redis:7"
         ports = ["db"]
       }
 
