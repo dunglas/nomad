@@ -59,12 +59,14 @@ job "registry" {
 e2euser:$2y$05$QpRvGkM/CMG.AG/G7Uh6guULMIlv1ZvjwfPa6dNjdkH.fhTzcpLDC
 auth_basic_user:$2y$05$b/lpKjGJhVMdgbpu1hxe0eAGegeHFrsWXH9g0JEO2gcWzPNgvesby
 auth_static_user:$2y$05$ZDOhbzsNe9pCcR0NslV72.gTrRLwI.05tq5yJMtFkD2LSS.G0wAYe
+auth_helper_user:$2y$05$sY4qctfzsjIhNyPD.zBEVumP0l6V5gU1f6GEThvHQ1cwupS8rogtu
         EOH
         destination = "local/auth.txt"
       }
 
       config {
         image        = "docker.io/library/registry:2"
+        auth_soft_fail = true
         ports        = ["registryhttp"]
         network_mode = "host"
       }
@@ -111,6 +113,7 @@ set -euo pipefail
 podman pull docker.io/library/bash:5
 podman push --tls-verify=false --authfile=local/auth.json docker.io/library/bash:5 localhost:{{- env "NOMAD_PORT_registryhttp" -}}/docker.io/library/bash_auth_basic:private
 podman push --tls-verify=false --authfile=local/auth.json docker.io/library/bash:5 localhost:{{- env "NOMAD_PORT_registryhttp" -}}/docker.io/library/bash_auth_static:private
+podman push --tls-verify=false --authfile=local/auth.json docker.io/library/bash:5 localhost:{{- env "NOMAD_PORT_registryhttp" -}}/docker.io/library/bash_auth_helper:private
         EOH
         destination = "local/script.sh"
       }

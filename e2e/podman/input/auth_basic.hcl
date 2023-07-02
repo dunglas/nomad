@@ -55,22 +55,10 @@ job "auth_basic" {
     task "echo" {
       driver = "podman"
 
-      #       template {
-      #         data        = <<EOH
-      # {
-      #   "auths": {
-      #     "${var.registry_address}:${var.registry_port}": {
-      #       "auth": "${local.registry_auth}"
-      #     }
-      #   }
-      # }
-      #         EOH
-      #         destination = "local/auth.json"
-      #       }
-
       config {
         image = "${var.registry_address}:${var.registry_port}/docker.io/library/bash_auth_basic:private"
         args  = ["echo", "The auth basic test is OK!"]
+        auth_soft_fail = true
 
         auth {
           username   = "${var.registry_username}"

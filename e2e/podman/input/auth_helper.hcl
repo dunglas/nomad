@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MPL-2.0
 
 # This job runs a podman task using a container stored in a private registry
-# configured with file config static authentication. The registry.hcl job should
+# configured with credentials helper authentication. The registry.hcl job should
 # be running and healthy before running this job.
 
 variable "registry_address" {
@@ -25,7 +25,7 @@ job "auth_static" {
     value     = "linux"
   }
 
-  group "static" {
+  group "helper" {
     reschedule {
       attempts  = 0
       unlimited = false
@@ -39,11 +39,12 @@ job "auth_static" {
       driver = "podman"
 
       config {
-        image = "${var.registry_address}:${var.registry_port}/docker.io/library/bash_auth_static:private"
-        args  = ["echo", "The static auth test is OK!"]
+        image = "${var.registry_address}:${var.registry_port}/docker.io/library/bash_auth_helper:private"
+        args  = ["echo", "The credentials helper auth test is OK!"]
 
         auth {
-          # usename and password come from auth.json in plugin config
+          # usename and password come from [docker-credential-]test.sh found on
+          # $PATH as specified by "helper=test.sh" in plugin config
           tls_verify = false
         }
       }
@@ -56,13 +57,21 @@ job "auth_static" {
   }
 }
 
-# auth.json (must be pointed to by config=<path>/auth.json)
+# test.sh (must be in $PATH)
 #
-# {
-#   "auths": {
-#     "127.0.0.1:7511/docker.io/library/bash_auth_static": {
-#       "auth": "YXV0aF9zdGF0aWNfdXNlcjphdXRoX3N0YXRpY19wYXNz"
-#     }
-#   }
-# }
+# #!/usr/bin/env bash
+# set -euo pipefail
+# value=$(cat /dev/stdin)
+# username="auth_helper_user"
+# password="auth_helper_pass"
+# case "${value}" in
+#   docker.io/*)
+#     echo "must use local registry"
+#     exit 3
+#     ;;
+#   *)
+#     echo "{\"Username\": \"$username\", \"Secret\": \"$password\"}"
+#     exit 0
+#     ;;
+# esac
 
