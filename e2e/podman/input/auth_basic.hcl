@@ -15,18 +15,19 @@ variable "registry_address" {
 variable "registry_port" {
   type        = number
   description = "The HTTP port of the local registry"
+  default = "7511"
 }
 
 variable "registry_username" {
   type        = string
   description = "The Basic Auth username of the local registry"
-  default     = "e2euser"
+  default     = "auth_basic_user"
 }
 
 variable "registry_password" {
   type        = string
   description = "The Basic Auth password of the local registry"
-  default     = "e2epassword"
+  default     = "auth_basic_pass"
 }
 
 locals {
@@ -68,19 +69,19 @@ job "auth_basic" {
       #       }
 
       config {
-        image = "${var.registry_address}:${var.registry_port}/docker.io/library/bash:private"
+        image = "${var.registry_address}:${var.registry_port}/docker.io/library/bash_auth_basic:private"
         args  = ["echo", "The auth basic test is OK!"]
 
         auth {
-          username   = "e2euser"
-          password   = "e2epassword"
+          username   = "${var.registry_username}"
+          password   = "${var.registry_password}"
           tls_verify = false
         }
       }
 
       resources {
-        cpu    = 50
-        memory = 32
+        cpu    = 100
+        memory = 64
       }
     }
   }

@@ -22,6 +22,7 @@ func TestPodman(t *testing.T) {
 
 	t.Run("testRedis", testRedis)
 	t.Run("testAuthBasic", testAuthBasic)
+	t.Run("testAuthFileStatic", testAuthFileStatic)
 }
 
 func testRedis(t *testing.T) {
@@ -32,26 +33,51 @@ func testRedis(t *testing.T) {
 	must.StrContains(t, logs.Stdout, "oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo")
 }
 
+func findService(t *testing.T, name string) (string, int) {
+	services, _, err := e2eutil.NomadClient(t).Services().Get(name, nil)
+	must.NoError(t, err, must.Sprintf("failed to find %q service", name))
+	must.Len(t, 1, services, must.Sprintf("expected 1 %q service", name))
+	return services[0].Address, services[0].Port
+}
+
 func testAuthBasic(t *testing.T) {
 	// start the private registry
 	_, regCleanup := jobs3.Submit(t, "./input/registry.hcl",
-		jobs3.Timeout(90*time.Second), // may need to pull 3 images
+		jobs3.Timeout(40*time.Second), // pulls an image
 	)
 	t.Cleanup(regCleanup)
 
 	// find the private registry service
-	services, _, err := e2eutil.NomadClient(t).Services().Get("registry", nil)
-	must.NoError(t, err, must.Sprint("failed to find registry service"))
-	must.Len(t, 1, services, must.Sprint("expected 1 registry service"))
+	regAddr, regPort := findService(t, "registry")
 
 	// run the private bash image
-	regService := services[0]
 	bashJob, bashCleanup := jobs3.Submit(t, "./input/auth_basic.hcl",
-		jobs3.Var("registry_address", regService.Address),
-		jobs3.Var("registry_port", strconv.Itoa(regService.Port)),
+		jobs3.Var("registry_address", regAddr),
+		jobs3.Var("registry_port", strconv.Itoa(regPort)),
 		jobs3.WaitComplete("basic"),
 	)
 	t.Cleanup(bashCleanup)
 	logs := bashJob.TaskLogs("basic", "echo")
 	must.StrContains(t, logs.Stdout, "The auth basic test is OK!")
+}
+
+func testAuthFileStatic(t *testing.T) {
+	// start the private registry
+	_, regCleanup := jobs3.Submit(t, "./input/registry.hcl",
+		jobs3.Timeout(40*time.Second), // pulls an image
+	)
+	t.Cleanup(regCleanup)
+
+	// find the private registry service
+	regAddr, regPort := findService(t, "registry")
+
+	// run the private bash image
+	bashJob, bashCleanup := jobs3.Submit(t, "./input/auth_static.hcl",
+		jobs3.Var("registry_address", regAddr),
+		jobs3.Var("registry_port", strconv.Itoa(regPort)),
+		jobs3.WaitComplete("static"),
+	)
+	t.Cleanup(bashCleanup)
+	logs := bashJob.TaskLogs("static", "echo")
+	must.StrContains(t, logs.Stdout, "The static auth test is OK!")
 }

@@ -4,13 +4,15 @@
 # This job stands up a private container registry for use in e2e tests.
 # In a post start task we then upload some default images for convenience.
 #
-# <address>:<port>/docker.io/library/bash:private
-# <address>:<port>/docker.io/library/python:private
+# <address>:<port>/docker.io/library/bash_auth_basic:private
 #
 # Note that the <address>:<port> is dynamic and can be found using NSD.
-# Note that credentials are required (e.g. podman login), and are
-# user: e2euser
-# password: e2epassword
+# Note that credentials are required (e.g. podman login), and are specific to
+# each image, e.g. "auth_basic_user" and "auth_basic_pass".
+#
+# To add a new username/password credential, run this container command
+# podman run --rm --entrypoint htpasswd registry:2.7.0 -Bbn <username> <password>
+# and add <username>:<hash> to the local/auth.txt file template below.
 
 job "registry" {
   type = "service"
@@ -29,7 +31,11 @@ job "registry" {
 
     network {
       mode = "host"
-      port "registryhttp" {}
+      port "registryhttp" {
+        # need a static port because plugin auth.json credentials file
+        # pattern matches on full registry address
+        static = "7511"
+      }
     }
 
     service {
@@ -51,6 +57,8 @@ job "registry" {
       template {
         data        = <<EOH
 e2euser:$2y$05$QpRvGkM/CMG.AG/G7Uh6guULMIlv1ZvjwfPa6dNjdkH.fhTzcpLDC
+auth_basic_user:$2y$05$b/lpKjGJhVMdgbpu1hxe0eAGegeHFrsWXH9g0JEO2gcWzPNgvesby
+auth_static_user:$2y$05$ZDOhbzsNe9pCcR0NslV72.gTrRLwI.05tq5yJMtFkD2LSS.G0wAYe
         EOH
         destination = "local/auth.txt"
       }
@@ -101,9 +109,8 @@ e2euser:$2y$05$QpRvGkM/CMG.AG/G7Uh6guULMIlv1ZvjwfPa6dNjdkH.fhTzcpLDC
         data        = <<EOH
 set -euo pipefail
 podman pull docker.io/library/bash:5
-podman pull docker.io/library/python:3
-podman push --tls-verify=false --authfile=local/auth.json docker.io/library/bash:5 localhost:{{- env "NOMAD_PORT_registryhttp" -}}/docker.io/library/bash:private
-podman push --tls-verify=false --authfile=local/auth.json docker.io/library/python:3 localhost:{{- env "NOMAD_PORT_registryhttp" -}}/docker.io/library/python:private
+podman push --tls-verify=false --authfile=local/auth.json docker.io/library/bash:5 localhost:{{- env "NOMAD_PORT_registryhttp" -}}/docker.io/library/bash_auth_basic:private
+podman push --tls-verify=false --authfile=local/auth.json docker.io/library/bash:5 localhost:{{- env "NOMAD_PORT_registryhttp" -}}/docker.io/library/bash_auth_static:private
         EOH
         destination = "local/script.sh"
       }
